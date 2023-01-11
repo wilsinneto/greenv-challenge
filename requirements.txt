@@ -1,0 +1,3 @@
+1º CRUD de Usuários
+2º Implementar Autenticação de Usuários cadastrados
+3º Executar aplicação em Docker
