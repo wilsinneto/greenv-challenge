@@ -1,7 +1,7 @@
 import { UserData } from '@/entities'
 import { UseCase } from '@/usecases/ports'
 import { HttpRequest, HttpResponse } from '@/web-controllers/ports'
-import { badRequest, created, serverError } from '@/web-controllers/util/http-helper'
+import { badRequest, ok, serverError } from '@/web-controllers/util/http-helper'
 import { MissingParamError } from './errors/missing-param-error'
 
 export class LoginController {
@@ -28,7 +28,7 @@ export class LoginController {
       }
 
       if (response.isRight()) {
-        return created({ email: response.value.email })
+        return ok({ email: response.value.email })
       }
     } catch (error) {
       return serverError(error)
