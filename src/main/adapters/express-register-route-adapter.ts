@@ -2,7 +2,7 @@ import { CreateUserController } from '@/web-controllers'
 import { HttpRequest } from '@/web-controllers/ports'
 import { Request, Response } from 'express'
 
-export const adaptRoute = (controller: CreateUserController) => {
+export const adaptRegisterRoute = (controller: CreateUserController) => {
   return async (request: Request, response: Response) => {
     const httpRequest: HttpRequest = {
       body: request.body
