@@ -1,46 +1,46 @@
-# Para baixar o repositório basta executar o seguinte comando:
+# To download the repository just run the following command:
 ```sh
 git clone git@github.com:wilsinneto/user-registration-and-login.git
 ```
 
-## Após realizar o git clone:
+## After performing the git clone:
 
-### Entre na pasta server com o comando:
+### Enter the server folder with the command:
 ```sh
 cd server
 ```
 
-### Após isso, execute o seguinte comando:
+### After that, run the following command:
 ```sh
 npm install
 ```
 
-### Pronto. Podemos executar a API de duas formas:
-#### 1º Através do comando:
+### Ready. We can run the API in two ways:
+#### 1º Through the command:
 ```sh
 npm start
 ```
 
 ou,
 
-#### 2º Através de docker:
+#### 2º Via docker:
 ```sh
 npm run start:docker 
 ```
 
-## Agora podemos executar o front da aplicação
+## Now we can run the front of the application
 
-### Entre na pasta client com o comando:
+### Enter the client folder with the command:
 ```sh
 cd client
 ```
 
-### Após isso, execute o seguinte comando:
+### After that, run the following command:
 ```sh
 npm install
 ```
 
-### Pronto. Podemos executar o front com o seguinte comando:
+### Ready. We can run the front with the following command:
 ```sh
 npm run serve
 ```
