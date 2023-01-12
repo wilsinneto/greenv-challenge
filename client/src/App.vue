@@ -11,7 +11,7 @@
     <br/>
     <br/>
     <label for="password">Password:</label>
-    <input type="text" id="password" v-model="user.password">
+    <input type="password" id="password" v-model="user.password">
     <br/>
     <br/>
     <button @click="createUser">Criar Usuário</button>
@@ -27,7 +27,7 @@
     <br/>
     <br/>
     <label for="passwordLogin">Password:</label>
-    <input type="text" id="passwordLogin" v-model="login.password">
+    <input type="password" id="passwordLogin" v-model="login.password">
     <br/>
     <br/>
     <button @click="authenticate">Login</button>
