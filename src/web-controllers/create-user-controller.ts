@@ -29,6 +29,8 @@ export class CreateUserController {
       }
 
       if (response.isRight()) {
+        Reflect.deleteProperty(response.value, 'password')
+
         return created(response.value)
       }
     } catch (error) {
