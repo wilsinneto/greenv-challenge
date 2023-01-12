@@ -13,9 +13,10 @@ export class CreateUserController {
 
   public async handle (request: HttpRequest): Promise<HttpResponse> {
     try {
-      if (!(request.body.name) || !(request.body.email)) {
+      if (!(request.body.name) || !(request.body.email) || !(request.body.password)) {
         let missingParam = !(request.body.name) ? 'name ' : ''
-        missingParam += !(request.body.email) ? 'email' : ''
+        missingParam += !(request.body.email) ? 'email ' : ''
+        missingParam += !(request.body.password) ? 'password' : ''
 
         return badRequest(new MissingParamError(missingParam.trim()))
       }
