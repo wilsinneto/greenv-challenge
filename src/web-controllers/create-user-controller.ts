@@ -29,9 +29,10 @@ export class CreateUserController {
       }
 
       if (response.isRight()) {
-        Reflect.deleteProperty(response.value, 'password')
-
-        return created(response.value)
+        return created({
+          name: response.value.name,
+          email: response.value.email
+        })
       }
     } catch (error) {
       return serverError(error)
