@@ -1,0 +1,12 @@
+version: '3.3'
+
+services:
+  app:
+    container_name: "app"
+    build: ./
+    volumes:
+      - .:/usr/src
+    working_dir: "/usr/src"
+    ports: 
+      - 5000:5000
+    command: ['npm', 'run', 'start']
