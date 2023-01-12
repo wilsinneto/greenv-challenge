@@ -25,7 +25,7 @@ describe('Login web controller', () => {
 
   const errorThrowingUseCaseStub: UseCase = new ErrorThrowingUseCaseStub()
 
-  test('should return status code 201 when request contains valid login data', async () => {
+  test('should return status code 200 when request contains valid login data', async () => {
     const createUserRequest: HttpRequest = {
       body: {
         name: 'Any name',
@@ -42,9 +42,10 @@ describe('Login web controller', () => {
 
     await createUserController.handle(createUserRequest)
 
-    const user = await loginController.handle(loginRequest)
+    const response = await loginController.handle(loginRequest)
 
-    expect(user.body).toEqual({ email: 'any@mail.com' })
+    expect(response.statusCode).toBe(200)
+    expect(response.body).toEqual({ email: 'any@mail.com' })
   })
 
   test('should return status code 400 when request contains invalid login email', async () => {

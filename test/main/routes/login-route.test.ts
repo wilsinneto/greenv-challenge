@@ -21,6 +21,6 @@ describe('Login route', () => {
         email: 'any@mail.com',
         password: 'abc'
       })
-      .expect(201)
+      .expect(200)
   })
 })
