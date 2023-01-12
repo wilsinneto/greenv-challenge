@@ -13,16 +13,17 @@ describe('In memory User repository', () => {
     const users: UserData[] = []
     const name = 'any_name'
     const email = 'any@mail.com'
+    const password = 'abc'
     const sut = new InMemoryUserRepository(users)
-    await sut.add({ name, email })
+    await sut.add({ name, email, password })
     const user = await sut.findUserByEmail('any@mail.com')
     expect(user.name).toBe('any_name')
   })
 
   test('should return all users in the repository', async () => {
     const users: UserData[] = [
-      { name: 'any_name', email: 'any@mail.com' },
-      { name: 'second_name', email: 'second@mail.com' }
+      { name: 'any_name', email: 'any@mail.com', password: 'abc' },
+      { name: 'second_name', email: 'second@mail.com', password: 'rty' }
     ]
 
     const sut = new InMemoryUserRepository(users)
