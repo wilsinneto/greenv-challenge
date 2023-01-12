@@ -34,7 +34,7 @@ describe('Create user web controller', () => {
     const response: HttpResponse = await controller.handle(request)
 
     expect(response.statusCode).toEqual(201)
-    expect(response.body).toEqual(request.body)
+    expect(response.body).toEqual({ name: 'Any name', email: 'any@mail.com' })
   })
 
   test('should return status code 400 when request contains invalid user name', async () => {
