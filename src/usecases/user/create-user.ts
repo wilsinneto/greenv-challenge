@@ -1,4 +1,4 @@
-import { InvalidEmailError, InvalidNameError } from '@/entities/errors'
+import { InvalidEmailError, InvalidNameError, InvalidPasswordError } from '@/entities/errors'
 
 import { User, UserData } from '@/entities'
 
@@ -14,8 +14,8 @@ export class CreateUser implements UseCase {
   }
 
   public async perform (request: UserData):
-    Promise<Either<InvalidNameError | InvalidEmailError, UserData>> {
-    const userOrError: Either<InvalidNameError | InvalidEmailError, User> = User.create(request)
+    Promise<Either<InvalidNameError | InvalidEmailError | InvalidPasswordError, UserData>> {
+    const userOrError: Either<InvalidNameError | InvalidEmailError | InvalidPasswordError, User> = User.create(request)
 
     if (userOrError.isLeft()) {
       return left(userOrError.value)
