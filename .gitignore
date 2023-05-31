@@ -1,7 +1,3 @@
 server/node_modules
 server/dist
 server/coverage
-
-client/node_modules
-client/dist
-client/coverage
