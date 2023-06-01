@@ -11,8 +11,9 @@ describe('Create user use case', () => {
     const name = 'any_name'
     const email = 'any@email.com'
     const password = 'abc'
+    const cpf = '896.987.609-03'
 
-    const response = await useCase.perform({ name, email, password })
+    const response = await useCase.perform({ name, email, password, cpf })
     const user = repo.findUserByEmail('any@email.com')
 
     expect((await user).name).toBe('any_name')
@@ -26,8 +27,9 @@ describe('Create user use case', () => {
     const name = 'any_name'
     const invalidEmail = 'invalid_email'
     const password = 'abc'
+    const cpf = '896.987.609-03'
 
-    const response = (await useCase.perform({ name, email: invalidEmail, password })).value as Error
+    const response = (await useCase.perform({ name, email: invalidEmail, password, cpf })).value as Error
     const user = await repo.findUserByEmail(invalidEmail)
 
     expect(user).toBeNull()
@@ -41,8 +43,9 @@ describe('Create user use case', () => {
     const invalidName = ''
     const email = 'any@email.com'
     const password = 'abc'
+    const cpf = '896.987.609-03'
 
-    const response = (await useCase.perform({ name: invalidName, email, password })).value as Error
+    const response = (await useCase.perform({ name: invalidName, email, password, cpf })).value as Error
     const user = await repo.findUserByEmail(email)
 
     expect(user).toBeNull()
@@ -56,11 +59,28 @@ describe('Create user use case', () => {
     const invalidName = 'any name'
     const email = 'any@email.com'
     const password = 'a'
+    const cpf = '896.987.609-03'
 
-    const response = (await useCase.perform({ name: invalidName, email, password })).value as Error
+    const response = (await useCase.perform({ name: invalidName, email, password, cpf })).value as Error
     const user = await repo.findUserByEmail(email)
 
     expect(user).toBeNull()
     expect(response.name).toEqual('InvalidPasswordError')
+  })
+
+  test('should not add user with invalid cpf', async () => {
+    const users: UserData[] = []
+    const repo: UserRepository = new InMemoryUserRepository(users)
+    const useCase: CreateUser = new CreateUser(repo)
+    const name = 'any name'
+    const email = 'any@email.com'
+    const password = 'abc'
+    const invalidCpf = '896.987.609-00'
+
+    const response = (await useCase.perform({ name, email, password, cpf: invalidCpf })).value as Error
+    const user = await repo.findUserByEmail(email)
+
+    expect(user).toBeNull()
+    expect(response.name).toEqual('InvalidCpfError')
   })
 })
