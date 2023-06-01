@@ -9,4 +9,12 @@ services:
     working_dir: "/usr/src"
     ports: 
       - 5000:5000
+    depends_on:
+      - db
     command: ['npm', 'run', 'start']
+  db:
+    container_name: db
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
