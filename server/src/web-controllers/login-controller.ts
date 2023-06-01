@@ -27,9 +27,7 @@ export class LoginController {
         return badRequest(response.value)
       }
 
-      if (response.isRight()) {
-        return ok({ email: response.value.email })
-      }
+      return ok(response.value)
     } catch (error) {
       return serverError(error)
     }
