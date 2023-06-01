@@ -13,8 +13,10 @@ describe('Login use case', () => {
     const name = 'any_name'
     const email = 'any@email.com'
     const password = 'abc'
+    const cpf = '033.371.534-96'
+    const phone = '(11)99000-3777'
 
-    await createUserUseCase.perform({ name, email, password })
+    await createUserUseCase.perform({ name, email, password, cpf, phone })
     const user = loginUseCase.perform({ email, password })
 
     expect((await user).value).toEqual({ email, password })
@@ -40,8 +42,10 @@ describe('Login use case', () => {
     const name = 'any_name'
     const email = 'any@email.com'
     const password = 'abc'
+    const cpf = '033.371.534-96'
+    const phone = '(11)99000-3777'
 
-    await createUserUseCase.perform({ name, email, password })
+    await createUserUseCase.perform({ name, email, password, cpf, phone })
     const response = (await loginUseCase.perform({ email, password: 'cba' })).value as Error
 
     expect(response.name).toEqual('InvalidEmailOrPasswordError')

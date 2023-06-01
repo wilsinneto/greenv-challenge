@@ -30,7 +30,9 @@ describe('Login web controller', () => {
       body: {
         name: 'Any name',
         email: 'any@mail.com',
-        password: 'abc'
+        password: 'abc',
+        cpf: '033.371.534-96',
+        phone: '(11)99000-3777'
       }
     }
     const loginRequest: HttpRequest = {
@@ -67,7 +69,9 @@ describe('Login web controller', () => {
       body: {
         name: 'Any name',
         email: 'any@mail.com',
-        password: 'abc'
+        password: 'abc',
+        cpf: '033.371.534-96',
+        phone: '(11)99000-3777'
       }
     }
     const loginRequest: HttpRequest = {

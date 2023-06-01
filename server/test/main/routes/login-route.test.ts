@@ -12,7 +12,9 @@ describe('Login route', () => {
       .send({
         name: 'Any name',
         email: 'any@mail.com',
-        password: 'abc'
+        password: 'abc',
+        cpf: '033.371.534-96',
+        phone: '(11)99000-3777'
       })
 
     await request(app)
