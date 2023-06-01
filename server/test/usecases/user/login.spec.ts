@@ -3,13 +3,14 @@ import { CreateUser } from '@/usecases/user'
 import { Login } from '@/usecases/user/login'
 import { UserRepository } from '@/usecases/user/ports'
 import { InMemoryUserRepository } from '@/usecases/user/repository'
+import jwt from 'jsonwebtoken'
 
 describe('Login use case', () => {
   test('should login with the existing user', async () => {
     const users: UserData[] = []
     const repo: UserRepository = new InMemoryUserRepository(users)
     const createUserUseCase: CreateUser = new CreateUser(repo)
-    const loginUseCase: Login = new Login(repo)
+    const loginUseCase: Login = new Login(repo, jwt)
     const name = 'any_name'
     const email = 'any@email.com'
     const password = 'abc'
@@ -19,13 +20,13 @@ describe('Login use case', () => {
     await createUserUseCase.perform({ name, email, password, cpf, phone })
     const user = loginUseCase.perform({ email, password })
 
-    expect((await user).value).toEqual({ email, password })
+    expect((await user).value).toEqual(expect.objectContaining({ email, name, cpf, phone }))
   })
 
   test('should not login with no-existing user', async () => {
     const users: UserData[] = []
     const repo: UserRepository = new InMemoryUserRepository(users)
-    const useCase: Login = new Login(repo)
+    const useCase: Login = new Login(repo, jwt)
     const email = 'any@mail.com'
     const password = 'abc'
 
@@ -38,7 +39,7 @@ describe('Login use case', () => {
     const users: UserData[] = []
     const repo: UserRepository = new InMemoryUserRepository(users)
     const createUserUseCase: CreateUser = new CreateUser(repo)
-    const loginUseCase: Login = new Login(repo)
+    const loginUseCase: Login = new Login(repo, jwt)
     const name = 'any_name'
     const email = 'any@email.com'
     const password = 'abc'

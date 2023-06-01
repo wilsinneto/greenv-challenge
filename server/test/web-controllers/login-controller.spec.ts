@@ -8,12 +8,13 @@ import { InMemoryUserRepository } from '@/usecases/user/repository'
 import { CreateUserController } from '@/web-controllers/create-user-controller'
 import { LoginController } from '@/web-controllers/login-controller'
 import { HttpRequest, HttpResponse } from '@/web-controllers/ports'
+import jwt from 'jsonwebtoken'
 
 describe('Login web controller', () => {
   const users: UserData[] = []
   const repo: UserRepository = new InMemoryUserRepository(users)
   const createUserUseCase: UseCase = new CreateUser(repo)
-  const loginUserUseCase: UseCase = new Login(repo)
+  const loginUserUseCase: UseCase = new Login(repo, jwt)
   const createUserController: CreateUserController = new CreateUserController(createUserUseCase)
   const loginController: LoginController = new LoginController(loginUserUseCase)
 
@@ -47,7 +48,12 @@ describe('Login web controller', () => {
     const response = await loginController.handle(loginRequest)
 
     expect(response.statusCode).toBe(200)
-    expect(response.body).toEqual({ email: 'any@mail.com' })
+    expect(response.body).toEqual(expect.objectContaining({
+      name: 'Any name',
+      email: 'any@mail.com',
+      cpf: '033.371.534-96',
+      phone: '(11)99000-3777'
+    }))
   })
 
   test('should return status code 400 when request contains invalid login email', async () => {
