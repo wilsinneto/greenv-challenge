@@ -1,5 +1,5 @@
 import { UserData } from '@/entities'
-import { InvalidEmailError, InvalidNameError, InvalidPasswordError } from '@/entities/errors'
+import { InvalidCpfError, InvalidEmailError, InvalidNameError, InvalidPasswordError } from '@/entities/errors'
 import { UseCase } from '@/usecases/ports'
 import { CreateUser } from '@/usecases/user'
 import { UserRepository } from '@/usecases/user/ports'
@@ -27,14 +27,15 @@ describe('Create user web controller', () => {
       body: {
         name: 'Any name',
         email: 'any@mail.com',
-        password: 'abc'
+        password: 'abc',
+        cpf: '896.987.609-03'
       }
     }
 
     const response: HttpResponse = await controller.handle(request)
 
     expect(response.statusCode).toEqual(201)
-    expect(response.body).toEqual({ name: 'Any name', email: 'any@mail.com' })
+    expect(response.body).toEqual({ name: 'Any name', email: 'any@mail.com', cpf: '896.987.609-03' })
   })
 
   test('should return status code 400 when request contains invalid user name', async () => {
@@ -42,7 +43,8 @@ describe('Create user web controller', () => {
       body: {
         name: 'A',
         email: 'any@mail.com',
-        password: 'abc'
+        password: 'abc',
+        cpf: '896.987.609-03'
       }
     }
 
@@ -57,7 +59,8 @@ describe('Create user web controller', () => {
       body: {
         name: 'Any name',
         email: 'any_mail.com',
-        password: 'abc'
+        password: 'abc',
+        cpf: '896.987.609-03'
       }
     }
 
@@ -72,7 +75,8 @@ describe('Create user web controller', () => {
       body: {
         name: 'Any name',
         email: 'any@mail.com',
-        password: 'a'
+        password: 'a',
+        cpf: '896.987.609-03'
       }
     }
 
@@ -82,11 +86,28 @@ describe('Create user web controller', () => {
     expect(response.body).toBeInstanceOf(InvalidPasswordError)
   })
 
+  test('should return status code 400 when request contains invalid user cpf', async () => {
+    const requestWithInvalidCpf: HttpRequest = {
+      body: {
+        name: 'Any name',
+        email: 'any@mail.com',
+        password: 'abc',
+        cpf: '896.987.609-00'
+      }
+    }
+
+    const response: HttpResponse = await controller.handle(requestWithInvalidCpf)
+
+    expect(response.statusCode).toEqual(400)
+    expect(response.body).toBeInstanceOf(InvalidCpfError)
+  })
+
   test('should return status code 400 when request is missing user name', async () => {
     const requestWithMissingName: HttpRequest = {
       body: {
         email: 'any@mail.com',
-        password: 'abc'
+        password: 'abc',
+        cpf: '896.987.609-03'
       }
     }
 
@@ -101,7 +122,8 @@ describe('Create user web controller', () => {
     const requestWithMissingEmail: HttpRequest = {
       body: {
         name: 'Any name',
-        password: 'abc'
+        password: 'abc',
+        cpf: '896.987.609-03'
       }
     }
 
@@ -112,16 +134,32 @@ describe('Create user web controller', () => {
     expect((response.body as Error).message).toEqual('Missing parameter from request: email.')
   })
 
-  test('should return status code 400 when request is missing user name and email', async () => {
-    const requestWithMissingNameAndEmail: HttpRequest = {
-      body: {}
+  test('should return status code 400 when request is missing user cpf', async () => {
+    const requestWithMissingCpf: HttpRequest = {
+      body: {
+        name: 'Any name',
+        email: 'any@mail.com',
+        password: 'abc'
+      }
     }
 
-    const response: HttpResponse = await controller.handle(requestWithMissingNameAndEmail)
+    const response: HttpResponse = await controller.handle(requestWithMissingCpf)
 
     expect(response.statusCode).toEqual(400)
     expect(response.body).toBeInstanceOf(MissingParamError)
-    expect((response.body as Error).message).toEqual('Missing parameter from request: name email password.')
+    expect((response.body as Error).message).toEqual('Missing parameter from request: cpf.')
+  })
+
+  test('should return status code 400 when request is missing user name, email and cpf', async () => {
+    const requestWithMissingNameEmailAndCpf: HttpRequest = {
+      body: {}
+    }
+
+    const response: HttpResponse = await controller.handle(requestWithMissingNameEmailAndCpf)
+
+    expect(response.statusCode).toEqual(400)
+    expect(response.body).toBeInstanceOf(MissingParamError)
+    expect((response.body as Error).message).toEqual('Missing parameter from request: name email password cpf.')
   })
 
   test('should return status code 500 when server raises', async () => {
@@ -129,7 +167,8 @@ describe('Create user web controller', () => {
       body: {
         name: 'Any name',
         email: 'any@mail.com',
-        password: 'abc'
+        password: 'abc',
+        cpf: '896.987.609-03'
       }
     }
 
