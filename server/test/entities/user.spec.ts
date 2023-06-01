@@ -1,4 +1,4 @@
-import { User } from '@/entities'
+import { User } from '@/entities/user'
 import { InvalidNameError } from '@/entities/errors'
 import { left } from '@/shared'
 

@@ -1,15 +1,18 @@
-import { Cpf, Email, Name, Password, Phone, UserData } from '@/entities'
+import { Cpf, Email, Name, Password, Phone, UserData } from '@/entities/user'
 import { InvalidCpfError, InvalidEmailError, InvalidNameError, InvalidPasswordError, InvalidPhoneError } from '@/entities/errors'
 import { Either, left, right } from '@/shared'
+import { randomUUID } from 'crypto'
 
 export class User {
+  public readonly id?: string | undefined
   public readonly email: Email
   public readonly name: Name
   public readonly password: Password
   public readonly cpf: Cpf
   public readonly phone: Phone
 
-  private constructor (name: Name, email: Email, password: Password, cpf: Cpf, phone: Phone) {
+  private constructor (id: string, name: Name, email: Email, password: Password, cpf: Cpf, phone: Phone) {
+    this.id = id || randomUUID()
     this.name = name
     this.email = email
     this.password = password
@@ -51,6 +54,6 @@ export class User {
     const cpf: Cpf = cpfOrError.value as Cpf
     const phone: Phone = phoneOrError.value as Phone
 
-    return right(new User(name, email, password, cpf, phone))
+    return right(new User(userData.id, name, email, password, cpf, phone))
   }
 }

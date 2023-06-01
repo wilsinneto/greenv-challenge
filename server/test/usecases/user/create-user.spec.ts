@@ -1,4 +1,4 @@
-import { UserData } from '@/entities'
+import { UserData } from '@/entities/user'
 import { CreateUser } from '@/usecases/user'
 import { UserRepository } from '@/usecases/user/ports'
 import { InMemoryUserRepository } from '@/usecases/user/repository'

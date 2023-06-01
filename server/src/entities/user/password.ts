@@ -1,6 +1,6 @@
 import { Either, left, right } from '@/shared'
 import crypto, { Cipher } from 'node:crypto'
-import { InvalidPasswordError } from './errors/invalid-password-error'
+import { InvalidPasswordError } from '../errors/invalid-password-error'
 
 interface EncryptedOutput {
   cipher: Cipher,

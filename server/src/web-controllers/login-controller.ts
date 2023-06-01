@@ -1,4 +1,4 @@
-import { UserData } from '@/entities'
+import { UserData } from '@/entities/user'
 import { UseCase } from '@/usecases/ports'
 import { HttpRequest, HttpResponse } from '@/web-controllers/ports'
 import { badRequest, ok, serverError } from '@/web-controllers/util/http-helper'

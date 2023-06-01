@@ -1,4 +1,4 @@
-import { Cpf } from '@/entities'
+import { Cpf } from '@/entities/user'
 
 describe('Cpf validation', () => {
   test('should not accept null strings', () => {

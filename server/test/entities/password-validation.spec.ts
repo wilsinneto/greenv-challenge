@@ -1,4 +1,4 @@
-import { Password } from '@/entities'
+import { Password } from '@/entities/user'
 
 describe('Password validation', () => {
   test('should not accept null strings', () => {

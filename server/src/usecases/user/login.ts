@@ -1,4 +1,4 @@
-import { Password } from '@/entities'
+import { Password } from '@/entities/user'
 
 import { InvalidEmailOrPasswordError } from '@/entities/errors/invalid-email-password-error'
 import { Either, left, right } from '@/shared'

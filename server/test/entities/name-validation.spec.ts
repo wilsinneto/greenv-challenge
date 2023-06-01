@@ -1,4 +1,4 @@
-import { Name } from '@/entities'
+import { Name } from '@/entities/user'
 
 describe('Name validation', () => {
   test('should not accept null strings', () => {

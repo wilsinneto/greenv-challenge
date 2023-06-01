@@ -1,4 +1,4 @@
-import { Phone } from '@/entities'
+import { Phone } from '@/entities/user'
 
 describe('Phone validation', () => {
   test('should not accept null strings', () => {

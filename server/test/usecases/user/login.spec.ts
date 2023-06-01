@@ -1,4 +1,4 @@
-import { UserData } from '@/entities'
+import { UserData } from '@/entities/user'
 import { CreateUser } from '@/usecases/user'
 import { Login } from '@/usecases/user/login'
 import { UserRepository } from '@/usecases/user/ports'

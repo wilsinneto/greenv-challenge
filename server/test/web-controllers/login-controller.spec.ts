@@ -1,4 +1,4 @@
-import { UserData } from '@/entities'
+import { UserData } from '@/entities/user'
 import { InvalidEmailOrPasswordError } from '@/entities/errors/invalid-email-password-error'
 import { UseCase } from '@/usecases/ports'
 import { CreateUser } from '@/usecases/user'

@@ -1,6 +1,6 @@
 import { InvalidCpfError, InvalidEmailError, InvalidNameError, InvalidPasswordError, InvalidPhoneError } from '@/entities/errors'
 
-import { User, UserData } from '@/entities'
+import { User, UserData } from '@/entities/user'
 
 import { Either, left, right } from '@/shared'
 import { UseCase } from '@/usecases/ports'
