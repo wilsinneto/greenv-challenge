@@ -28,14 +28,15 @@ describe('Create user web controller', () => {
         name: 'Any name',
         email: 'any@mail.com',
         password: 'abc',
-        cpf: '896.987.609-03'
+        cpf: '896.987.609-03',
+        phone: '(11)99000-3777'
       }
     }
 
     const response: HttpResponse = await controller.handle(request)
 
     expect(response.statusCode).toEqual(201)
-    expect(response.body).toEqual({ name: 'Any name', email: 'any@mail.com', cpf: '896.987.609-03' })
+    expect(response.body).toEqual({ name: 'Any name', email: 'any@mail.com', cpf: '896.987.609-03', phone: '(11)99000-3777' })
   })
 
   test('should return status code 400 when request contains invalid user name', async () => {
@@ -44,7 +45,8 @@ describe('Create user web controller', () => {
         name: 'A',
         email: 'any@mail.com',
         password: 'abc',
-        cpf: '896.987.609-03'
+        cpf: '896.987.609-03',
+        phone: '(11)99000-3777'
       }
     }
 
@@ -60,7 +62,8 @@ describe('Create user web controller', () => {
         name: 'Any name',
         email: 'any_mail.com',
         password: 'abc',
-        cpf: '896.987.609-03'
+        cpf: '896.987.609-03',
+        phone: '(11)99000-3777'
       }
     }
 
@@ -76,7 +79,8 @@ describe('Create user web controller', () => {
         name: 'Any name',
         email: 'any@mail.com',
         password: 'a',
-        cpf: '896.987.609-03'
+        cpf: '896.987.609-03',
+        phone: '(11)99000-3777'
       }
     }
 
@@ -92,7 +96,8 @@ describe('Create user web controller', () => {
         name: 'Any name',
         email: 'any@mail.com',
         password: 'abc',
-        cpf: '896.987.609-00'
+        cpf: '896.987.609-00',
+        phone: '(11)99000-3777'
       }
     }
 
@@ -107,7 +112,8 @@ describe('Create user web controller', () => {
       body: {
         email: 'any@mail.com',
         password: 'abc',
-        cpf: '896.987.609-03'
+        cpf: '896.987.609-03',
+        phone: '(11)99000-3777'
       }
     }
 
@@ -123,7 +129,8 @@ describe('Create user web controller', () => {
       body: {
         name: 'Any name',
         password: 'abc',
-        cpf: '896.987.609-03'
+        cpf: '896.987.609-03',
+        phone: '(11)99000-3777'
       }
     }
 
@@ -139,7 +146,8 @@ describe('Create user web controller', () => {
       body: {
         name: 'Any name',
         email: 'any@mail.com',
-        password: 'abc'
+        password: 'abc',
+        phone: '(11)99000-3777'
       }
     }
 
@@ -150,7 +158,24 @@ describe('Create user web controller', () => {
     expect((response.body as Error).message).toEqual('Missing parameter from request: cpf.')
   })
 
-  test('should return status code 400 when request is missing user name, email and cpf', async () => {
+  test('should return status code 400 when request is missing user phone', async () => {
+    const requestWithMissingPhone: HttpRequest = {
+      body: {
+        name: 'Any name',
+        email: 'any@mail.com',
+        password: 'abc',
+        cpf: '896.987.609-03'
+      }
+    }
+
+    const response: HttpResponse = await controller.handle(requestWithMissingPhone)
+
+    expect(response.statusCode).toEqual(400)
+    expect(response.body).toBeInstanceOf(MissingParamError)
+    expect((response.body as Error).message).toEqual('Missing parameter from request: phone.')
+  })
+
+  test('should return status code 400 when request is missing user name, email, cpf and phone', async () => {
     const requestWithMissingNameEmailAndCpf: HttpRequest = {
       body: {}
     }
@@ -159,7 +184,7 @@ describe('Create user web controller', () => {
 
     expect(response.statusCode).toEqual(400)
     expect(response.body).toBeInstanceOf(MissingParamError)
-    expect((response.body as Error).message).toEqual('Missing parameter from request: name email password cpf.')
+    expect((response.body as Error).message).toEqual('Missing parameter from request: name email password cpf phone.')
   })
 
   test('should return status code 500 when server raises', async () => {
@@ -168,7 +193,8 @@ describe('Create user web controller', () => {
         name: 'Any name',
         email: 'any@mail.com',
         password: 'abc',
-        cpf: '896.987.609-03'
+        cpf: '896.987.609-03',
+        phone: '(11)99000-3777'
       }
     }
 
