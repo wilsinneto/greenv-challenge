@@ -1,6 +1,6 @@
 import { CreateUser } from '@/usecases/user'
 import { CreateUserController } from '@/web-controllers/'
-import { PrismaUserRepository } from '@/external/repositories/prisma/prisma-user.repository'
+import { PrismaUserRepository } from '@/external/repositories/prisma'
 import { prisma } from '@/external/repositories/prisma/helper'
 
 export const makeCreateUserController = (): CreateUserController => {
