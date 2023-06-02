@@ -1,10 +1,10 @@
 import { CreateUser } from '@/usecases/user'
-import { InMemoryUserRepository } from '@/usecases/user/repository'
 import { CreateUserController } from '@/web-controllers/'
-import { database } from '../database'
+import { PrismaUserRepository } from '@/external/repositories/prisma/prisma-user.repository'
+import { prisma } from '@/external/repositories/prisma/helper'
 
 export const makeCreateUserController = (): CreateUserController => {
-  const inMemoryUserRepository = new InMemoryUserRepository(database)
+  const inMemoryUserRepository = new PrismaUserRepository(prisma)
   const createUserUseCase = new CreateUser(inMemoryUserRepository)
   const createUserController = new CreateUserController(createUserUseCase)
 
