@@ -1,5 +1,5 @@
 import { Cnpj, Email, Name, Phone, CompanyData } from '@/entities/company'
-import { InvalidCnpjError, InvalidEmailError, InvalidNameError, InvalidPasswordError, InvalidPhoneError } from '@/entities/errors'
+import { InvalidCnpjError, InvalidEmailError, InvalidNameError, InvalidPhoneError } from '@/entities/errors'
 import { Either, left, right } from '@/shared'
 import { randomUUID } from 'crypto'
 
@@ -20,7 +20,7 @@ export class Company {
 
   static create (
     companyData: CompanyData
-  ): Either<InvalidNameError | InvalidEmailError | InvalidPasswordError | InvalidCnpjError | InvalidPhoneError, Company> {
+  ): Either<InvalidNameError | InvalidEmailError | InvalidCnpjError | InvalidPhoneError, Company> {
     const nameOrError = Name.create(companyData.name)
     if (nameOrError.isLeft()) {
       return left(nameOrError.value)
