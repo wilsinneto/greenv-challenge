@@ -4,11 +4,11 @@ import { Either, left, right } from '@/shared'
 import { UseCase } from '@/usecases/ports'
 import { CompanyRepository } from '@/usecases/company/ports'
 
-export class CreateUser implements UseCase {
+export class CreateCompany implements UseCase {
   private readonly companyRepo: CompanyRepository
 
-  constructor (userRepo: CompanyRepository) {
-    this.companyRepo = userRepo
+  constructor (companyRepo: CompanyRepository) {
+    this.companyRepo = companyRepo
   }
 
   public async perform (request: CompanyData):
