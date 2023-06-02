@@ -1,6 +1,6 @@
 # To download the repository just run the following command:
 ```sh
-git clone git@github.com:wilsinneto/user-registration-and-login.git
+git clone git@github.com:wilsinneto/greenv-challenge.git
 ```
 
 ## After performing the git clone:
@@ -26,21 +26,4 @@ ou,
 #### 2º Via docker:
 ```sh
 npm run start:docker 
-```
-
-## Now we can run the front of the application
-
-### Enter the client folder with the command:
-```sh
-cd client
-```
-
-### After that, run the following command:
-```sh
-npm install
-```
-
-### Ready. We can run the front with the following command:
-```sh
-npm run serve
 ```
