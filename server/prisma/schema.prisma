@@ -18,3 +18,11 @@ model Users {
   cpf String
   phone String
 }
+
+model Companies {
+  id    String     @id
+  name  String
+  email String  @unique
+  cnpj String
+  phone String
+}
