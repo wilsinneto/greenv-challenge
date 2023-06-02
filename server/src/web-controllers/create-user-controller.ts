@@ -34,6 +34,7 @@ export class CreateUserController {
 
       if (response.isRight()) {
         return created({
+          id: response.value.id,
           name: response.value.name,
           email: response.value.email,
           cpf: response.value.cpf,

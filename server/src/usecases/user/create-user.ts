@@ -25,6 +25,6 @@ export class CreateUser implements UseCase {
       await this.userRepo.add(request)
     }
 
-    return right(request)
+    return right({ id: userOrError.value.id, ...request })
   }
 }
