@@ -8,7 +8,26 @@ describe('Create company route', () => {
       res.send()
     })
     await request(app)
+      .post('/api/register')
+      .send({
+        name: 'Any name',
+        email: 'any@mail.com',
+        password: 'abc',
+        cpf: '033.371.534-96',
+        phone: '(11)99000-3777'
+      })
+
+    const response = await request(app)
+      .post('/api/login')
+      .send({
+        email: 'any@mail.com',
+        password: 'abc'
+      })
+      .expect(200)
+
+    await request(app)
       .post('/api/company')
+      .set('Authorization', 'bearer ' + response.body.token)
       .send({
         name: 'Any name',
         email: 'any@mail.com',
