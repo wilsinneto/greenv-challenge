@@ -27,3 +27,12 @@ ou,
 ```sh
 npm run start:docker 
 ```
+
+### After that, run the following command:
+```sh
+docker exec -it app /bin/bash
+```
+### and to run as migrations
+```sh
+npx prisma migrate dev
+```
